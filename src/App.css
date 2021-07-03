@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.typed-letters {
+  color: black;
+}
+
+.waiting-letters {
+  color: #aaaaaa;
+}
+
+#textbox {
+  padding: 1rem;
+}
