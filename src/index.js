@@ -11,12 +11,16 @@ class Form extends React.Component {
     return (
       <div>
       <li>
-        <input id="form"
+        <input id="form" autoFocus //<- Focus on rendering.
           value={
             this.props.vocab.slice(0, this.props.position) + ' ' +
             this.props.vocab.slice(this.props.position)
           }
+          ref={'input'}
           onChange={this.props.checkValue}
+          onBlur={() => {
+            ReactDOM.findDOMNode(this.refs.input).focus();
+          }}
         />
       </li>
       <li>
