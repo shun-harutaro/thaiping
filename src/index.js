@@ -3,28 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 //import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Vocab from './vocab.json';
 
 class Form extends React.Component {
-  /*
-  checkValue(event) {
-    let type = event.target.name;
-    let val = event.target.value;
-    //console.log('typed ' + val + ' as ' + type);
-    this.props.data.checkValue(type, val, event)
-  }
-  */
-
   render() {
     return (
       <li>
-        <input type="email" name="mail" placeholder='Email'
+        <input
           value={
             this.props.vocab.slice(0, this.props.position) + ' ' +
             this.props.vocab.slice(this.props.position)
           }
           onChange={this.props.checkValue}
         />
-        <p>{this.props.error}</p>
+        <p>{this.props.translate}</p>
       </li>
     );
   }
@@ -34,10 +26,16 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      vocab: 'เดิน',
-      message: null,
+      vocab: Vocab[0].th,
+      count: 0,
+      translate: null,
       position: 0,
     }
+  }
+
+  getVocab = (count) => {
+    let next_vocab = Vocab[count].th;
+    return next_vocab;
   }
   
   // setState が undefined になるんでアロー関数
@@ -45,9 +43,9 @@ class Game extends React.Component {
     let value = event.target.value;
     let c = value.charAt(value.length - 1);
     let vocab = this.state.vocab;
-    let message = null;
+    //let message = null;
     let position = this.state.position;
-    console.log(vocab, value, c);
+    let count = this.state.count;
     
     if (c === vocab[position]) {
       console.log("correct")
@@ -55,10 +53,15 @@ class Game extends React.Component {
     } else {
       console.log("incorrct")
     }
-
+    if (vocab.length === position) {
+      count += 1;
+      vocab = this.getVocab(count);
+      position = 0;
+    }
     this.setState({
       vocab: vocab,
-      message: message,
+      count: count,
+      //message: message,
       position: position,
     });
   }
@@ -67,7 +70,7 @@ class Game extends React.Component {
     let data = {
       vocab: this.state.vocab,
       position: this.state.position,
-      error: this.state.message,
+      translate: this.state.translate,
       checkValue: this.checkValue
     }
     return (
