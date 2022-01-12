@@ -16,7 +16,7 @@ class Form extends React.Component {
           }
           onChange={this.props.checkValue}
         />
-        <p>{this.props.translate}</p>
+        <p>{this.props.translation}</p>
       </li>
     );
   }
@@ -28,14 +28,16 @@ class Game extends React.Component {
     this.state = {
       vocab: Vocab[0].th,
       count: 0,
-      translate: null,
+      translation: Vocab[0].en,
       position: 0,
     }
   }
 
   getVocab = (count) => {
-    let next_vocab = Vocab[count].th;
-    return next_vocab;
+    const next = new Object();
+    next.vocab = Vocab[count].th;
+    next.translation = Vocab[count].en;
+    return next;
   }
   
   // setState が undefined になるんでアロー関数
@@ -43,7 +45,7 @@ class Game extends React.Component {
     let value = event.target.value;
     let c = value.charAt(value.length - 1);
     let vocab = this.state.vocab;
-    //let message = null;
+    let translation = this.state.translation;
     let position = this.state.position;
     let count = this.state.count;
     
@@ -55,13 +57,15 @@ class Game extends React.Component {
     }
     if (vocab.length === position) {
       count += 1;
-      vocab = this.getVocab(count);
+      const next = this.getVocab(count);
+      vocab = next.vocab;
+      translation = next.translation
       position = 0;
     }
     this.setState({
       vocab: vocab,
       count: count,
-      //message: message,
+      translation: translation,
       position: position,
     });
   }
@@ -70,7 +74,7 @@ class Game extends React.Component {
     let data = {
       vocab: this.state.vocab,
       position: this.state.position,
-      translate: this.state.translate,
+      translation: this.state.translation,
       checkValue: this.checkValue
     }
     return (
