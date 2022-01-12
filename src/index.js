@@ -5,18 +5,23 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 class Form extends React.Component {
+  /*
   checkValue(event) {
     let type = event.target.name;
     let val = event.target.value;
     //console.log('typed ' + val + ' as ' + type);
     this.props.data.checkValue(type, val, event)
   }
+  */
 
   render() {
     return (
       <li>
         <input type="email" name="mail" placeholder='Email'
-          value={this.props.vocab}
+          value={
+            this.props.vocab.slice(0, this.props.position) + ' ' +
+            this.props.vocab.slice(this.props.position)
+          }
           onChange={this.props.checkValue}
         />
         <p>{this.props.error}</p>
@@ -29,59 +34,43 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      vocab: 'abc',
+      vocab: 'เดิน',
       message: null,
-      position: null,
+      position: 0,
     }
   }
   
   // setState が undefined になるんでアロー関数
   checkValue = (event) => {
-    let vocab = event.target.value;
+    let value = event.target.value;
+    let c = value.charAt(value.length - 1);
+    let vocab = this.state.vocab;
     let message = null;
-    let position = null;
-    if (event.target.validationMessage) {
-      message = event.target.validationMessage;
-      position = false;
+    let position = this.state.position;
+    console.log(vocab, value, c);
+    
+    if (c === vocab[position]) {
+      console.log("correct")
+      position += 1;
     } else {
-      message = null;
-      position = true;
+      console.log("incorrct")
     }
+
     this.setState({
       vocab: vocab,
       message: message,
       position: position,
     });
-
   }
-  /*
-  handleKey(e) {
-    if (e === this.state.vocab[position]) {
-      this.state.position += 1;
-    }
-  }
-  */
 
   render() {
     let data = {
       vocab: this.state.vocab,
+      position: this.state.position,
       error: this.state.message,
       checkValue: this.checkValue
     }
     return (
-      /*
-      <div className='App'>
-        <div id='textbox'>
-          <span className='typed-letters text'>
-            {this.state.vocab.slice(0, this.state.position)}
-          </span>
-          <span> </span>
-          <span>
-            {this.state.vocab.slice(this.state.position)}
-          </span>
-        </div>
-      </div>
-      */
       <Form {...data} />
     );
   }
