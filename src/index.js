@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import './App.css'
 //import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Vocab from './vocab.json';
@@ -9,31 +8,16 @@ import Vocab from './vocab.json';
 class Form extends React.Component {
   render() {
     return (
-      <div>
       <li>
-        <input id="form"
+        <input
           value={
             this.props.vocab.slice(0, this.props.position) + ' ' +
             this.props.vocab.slice(this.props.position)
           }
           onChange={this.props.checkValue}
         />
-      </li>
-      <li>
-        <div id='textbox'>
-          <span className='typed-letters text'>
-            {this.props.vocab.slice(0, this.props.position)}
-          </span>
-          <span> </span>
-          <span className='waiting-letters text'>
-            {this.props.vocab.slice(this.props.position)}
-          </span>
-        </div>
-      </li>
-      <li>
         <p>{this.props.translation}</p>
       </li>
-      </div>
     );
   }
 };
