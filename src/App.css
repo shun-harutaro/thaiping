@@ -59,6 +59,9 @@
   padding: 10px, 15px;
   font-size: 40px;
   box-sizing: border-box;
-  color: #aaaaaa;
+  color: white;
   border: none;
+}
+#form:focus {
+  outline: none;
 }
