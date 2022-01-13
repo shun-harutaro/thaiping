@@ -7,16 +7,24 @@ import reportWebVitals from './reportWebVitals';
 import Vocab from './vocab.json';
 
 class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.keepFocus = React.createRef(); // String attribute is deprecated
+  }
   render() {
     return (
       <div>
       <li>
-        <input id="form"
+        <input id="form" autoFocus //<- Focus on rendering.
           value={
             this.props.vocab.slice(0, this.props.position) + ' ' +
             this.props.vocab.slice(this.props.position)
           }
+          ref={this.keepFocus}
           onChange={this.props.checkValue}
+          onBlur={() => {
+            ReactDOM.findDOMNode(this.keepFocus.current).focus();
+          }}
         />
       </li>
       <li>
