@@ -16,8 +16,8 @@ class Form extends React.Component {
   }
   render() {
     return (
-      <div>
-      <li>
+      <div className='wrapper' css={wrapper}>
+      <div className='form'>
         <input css={hideForm} autoFocus //<- Focus on rendering.
           value={
             this.props.vocab.slice(0, this.props.position) + ' ' +
@@ -29,8 +29,8 @@ class Form extends React.Component {
             ReactDOM.findDOMNode(this.keepFocus.current).focus();
           }}
         />
-      </li>
-      <li>
+      </div>
+      <div className='text'>
         <div css={textbox}>
           <span css={[text, typed]}>
             {this.props.vocab.slice(0, this.props.position)}
@@ -40,10 +40,10 @@ class Form extends React.Component {
             {this.props.vocab.slice(this.props.position)}
           </span>
         </div>
-      </li>
-      <li>
+      </div>
+      <div className='translation'>
         <p>{this.props.translation}</p>
-      </li>
+      </div>
       </div>
     );
   }
@@ -105,10 +105,20 @@ class Game extends React.Component {
       checkValue: this.checkValue
     }
     return (
-      <Form {...data} />
+      <div css={body}>
+        <Form {...data} />
+      </div>
     );
   }
 };
+
+const body = css`
+  min-height: 100vh;
+  background: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const typed = css`
   color: black;
@@ -133,6 +143,12 @@ const textbox = css`
 const text = css`
   font-size: 100px;
   display: inline;
+`
+
+const wrapper = css`
+  width: 50%;
+  background: white;
+  text-align: center;
 `
 
 
