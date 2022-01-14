@@ -1,23 +1,50 @@
+/** @jsxImportSource @emotion/react */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { css, keyframes } from '@emotion/react'
 import './index.css';
+//import './App.css'
 //import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Vocab from './vocab.json';
+import { type } from '@testing-library/user-event/dist/type';
 
 class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.keepFocus = React.createRef(); // String attribute is deprecated
+  }
   render() {
     return (
-      <li>
-        <input
+      <div className='wrapper' css={[wrapper, background]}>
+      <div className='form'>
+        <input css={hideForm} autoFocus //<- Focus on rendering.
           value={
             this.props.vocab.slice(0, this.props.position) + ' ' +
             this.props.vocab.slice(this.props.position)
           }
+          ref={this.keepFocus}
           onChange={this.props.checkValue}
+          onBlur={() => {
+            ReactDOM.findDOMNode(this.keepFocus.current).focus();
+          }}
         />
+      </div>
+      <div className='text'>
+        <div css={textbox}>
+          <span css={[text, typed]}>
+            {this.props.vocab.slice(0, this.props.position)}
+          </span>
+          <span> </span>
+          <span css={[text, waiting]}>
+            {this.props.vocab.slice(this.props.position)}
+          </span>
+        </div>
+      </div>
+      <div className='translation'>
         <p>{this.props.translation}</p>
-      </li>
+      </div>
+      </div>
     );
   }
 };
@@ -39,6 +66,18 @@ class Game extends React.Component {
     next.translation = Vocab[count].en;
     return next;
   }
+
+  cssMistake = () => {
+    background = css`
+      animation: ${miss}, 0.5s;
+      animation-fill-mode: forwards;
+    `
+    setTimeout(() => {
+      background = css`
+        background: white;
+      `
+    },1);
+  }
   
   // setState が undefined になるんでアロー関数
   checkValue = (event) => {
@@ -53,6 +92,7 @@ class Game extends React.Component {
       console.log("correct")
       position += 1;
     } else {
+      this.cssMistake();
       console.log("incorrct")
     }
     if (vocab.length === position) {
@@ -78,10 +118,62 @@ class Game extends React.Component {
       checkValue: this.checkValue
     }
     return (
-      <Form {...data} />
+      <div css={body}>
+        <Form {...data} />
+      </div>
     );
   }
 };
+
+let background = css`
+  background: white;
+`
+
+const body = css`
+  min-height: 100vh;
+  background: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const typed = css`
+  color: black;
+`
+
+const waiting = css`
+  color: #aaaaaa;
+`
+
+const hideForm = css`
+  color: transparent;
+  background: transparent;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+`
+
+const textbox = css`
+  padding: 1rem;
+`
+
+const text = css`
+  font-size: 100px;
+  display: inline;
+`
+
+const wrapper = css`
+  width: 50%;
+  text-align: center;
+`
+
+const miss = keyframes`
+  100% {
+    background: #f003;
+  }
+`
+
 
 ReactDOM.render(
   /*
@@ -97,3 +189,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
