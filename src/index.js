@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { css } from '@emotion/react'
+import { css, keyframes } from '@emotion/react'
 import './index.css';
 //import './App.css'
 //import App from './App';
@@ -16,7 +16,7 @@ class Form extends React.Component {
   }
   render() {
     return (
-      <div className='wrapper' css={wrapper}>
+      <div className='wrapper' css={[wrapper, background]}>
       <div className='form'>
         <input css={hideForm} autoFocus //<- Focus on rendering.
           value={
@@ -66,6 +66,18 @@ class Game extends React.Component {
     next.translation = Vocab[count].en;
     return next;
   }
+
+  cssMistake = () => {
+    background = css`
+      animation: ${miss}, 0.5s;
+      animation-fill-mode: forwards;
+    `
+    setTimeout(() => {
+      background = css`
+        background: white;
+      `
+    },1);
+  }
   
   // setState が undefined になるんでアロー関数
   checkValue = (event) => {
@@ -80,6 +92,7 @@ class Game extends React.Component {
       console.log("correct")
       position += 1;
     } else {
+      this.cssMistake();
       console.log("incorrct")
     }
     if (vocab.length === position) {
@@ -112,6 +125,10 @@ class Game extends React.Component {
   }
 };
 
+let background = css`
+  background: white;
+`
+
 const body = css`
   min-height: 100vh;
   background: lightgray;
@@ -129,7 +146,8 @@ const waiting = css`
 `
 
 const hideForm = css`
-  color: white;
+  color: transparent;
+  background: transparent;
   border: none;
   &:focus {
     outline: none;
@@ -147,8 +165,13 @@ const text = css`
 
 const wrapper = css`
   width: 50%;
-  background: white;
   text-align: center;
+`
+
+const miss = keyframes`
+  100% {
+    background: #f003;
+  }
 `
 
 
