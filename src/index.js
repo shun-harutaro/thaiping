@@ -1,10 +1,13 @@
+/** @jsxImportSource @emotion/react */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { css } from '@emotion/react'
 import './index.css';
-import './App.css'
+//import './App.css'
 //import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Vocab from './vocab.json';
+import { type } from '@testing-library/user-event/dist/type';
 
 class Form extends React.Component {
   constructor(props) {
@@ -15,7 +18,7 @@ class Form extends React.Component {
     return (
       <div>
       <li>
-        <input id="form" autoFocus //<- Focus on rendering.
+        <input css={hideForm} autoFocus //<- Focus on rendering.
           value={
             this.props.vocab.slice(0, this.props.position) + ' ' +
             this.props.vocab.slice(this.props.position)
@@ -28,12 +31,12 @@ class Form extends React.Component {
         />
       </li>
       <li>
-        <div id='textbox'>
-          <span className='typed-letters text'>
+        <div css={textbox}>
+          <span css={[text, typed]}>
             {this.props.vocab.slice(0, this.props.position)}
           </span>
           <span> </span>
-          <span className='waiting-letters text'>
+          <span css={[text, waiting]}>
             {this.props.vocab.slice(this.props.position)}
           </span>
         </div>
@@ -107,6 +110,32 @@ class Game extends React.Component {
   }
 };
 
+const typed = css`
+  color: black;
+`
+
+const waiting = css`
+  color: #aaaaaa;
+`
+
+const hideForm = css`
+  color: white;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+`
+
+const textbox = css`
+  padding: 1rem;
+`
+
+const text = css`
+  font-size: 100px;
+  display: inline;
+`
+
+
 ReactDOM.render(
   /*
   <React.StrictMode>
@@ -121,3 +150,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+

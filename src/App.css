@@ -36,32 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-.typed-letters {
-  color: black;
-}
-
-.waiting-letters {
-  color: #aaaaaa;
-}
-
-#textbox {
-  padding: 1rem;
-}
-
-.text {
-  font-size: 100px;
-  display: inline;
-}
-
-#form {
-  width:50%;
-  padding: 10px, 15px;
-  font-size: 40px;
-  box-sizing: border-box;
-  color: white;
-  border: none;
-}
-#form:focus {
-  outline: none;
-}
