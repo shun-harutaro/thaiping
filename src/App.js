@@ -11,10 +11,17 @@ export default class App extends React.Component {
       window: 'start',
     }
   }
+
+  startGame = () => {
+    this.setState({
+      window: 'game'
+    })
+  }
+
   render() {
     const current_window = this.state.window;
     if (current_window === 'start') {
-      return (<Start />)
+      return (<Start startGame={this.startGame} />)
     } else if (current_window === 'game') {
       return (<Game />)
     }

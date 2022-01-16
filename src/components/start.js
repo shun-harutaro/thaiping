@@ -12,6 +12,7 @@ export default class Start extends React.Component {
       <div css={body}>
         <div css={wrapper}>
           <p>start window</p>
+          <button onClick={this.props.startGame}>start</button>
         </div>
       </div>
     )
