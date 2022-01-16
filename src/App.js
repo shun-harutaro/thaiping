@@ -1,13 +1,14 @@
-/*
-import React, {useState} from 'react';
-import './App.css';
+/** @jsxImportSource @emotion/react */
+import React from 'react';
+//import {css, keyframes} from '@emotion/react'
+import Game from './components/game'
 
-function App() {
-  return (
-    <div className="App">
-    </div>
-  );
-}
-
-export default App;
-*/
+export default class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Game />
+      </div>
+    )
+  }
+};
