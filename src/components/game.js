@@ -9,10 +9,12 @@ export default class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      vocab: Vocab[0].th,
-      count: 0,
+      vocab: Vocab[16].th,
+      count: 16,
       translation: Vocab[0].en,
       position: 0,
+      missCount: 0,
+      typeTime: 0,
     };
   }
 
@@ -36,6 +38,12 @@ export default class Game extends React.Component {
     }, 1);
   }
 
+  finish = () => {
+    const missCount = this.state.missCount;
+    const typeTime = this.state.typeTime;
+    this.props.setResult();
+  }
+
   // Since state is assumed to be undefined, use the arrow function
   checkValue = (event) => {
     const value = event.target.value;
@@ -44,15 +52,21 @@ export default class Game extends React.Component {
     let translation = this.state.translation;
     let position = this.state.position;
     let count = this.state.count;
+    let missCount = this.state.missCount;
 
     if (c === vocab[position]) {
       console.log("correct")
       position += 1;
     } else {
       this.cssMistake();
+      missCount += 1;
       console.log("incorrct")
     }
     if (vocab.length === position) {
+      if (count === Vocab.length - 1) {
+        this.finish();
+        return false;
+      }
       count += 1;
       const next = this.getVocab(count);
       vocab = next.vocab;
@@ -64,6 +78,7 @@ export default class Game extends React.Component {
       count: count,
       translation: translation,
       position: position,
+      missCount: missCount,
     });
   }
 
