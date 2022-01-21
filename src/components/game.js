@@ -13,9 +13,14 @@ export default class Game extends React.Component {
       count: 16,
       translation: Vocab[0].en,
       position: 0,
+      typeCount: 0,
       missCount: 0,
-      typeTime: 0,
+      startTime: 0,
     };
+  }
+
+  componentDidMount() {
+    this.setState({startTime: Date.now()/*new Date()*/})
   }
 
   getVocab = (count) => {
@@ -39,8 +44,10 @@ export default class Game extends React.Component {
   }
 
   finish = () => {
+    const finishTime = Date.now();
     const missCount = this.state.missCount;
-    const typeTime = this.state.typeTime;
+    const typeTime = finishTime - this.state.startTime;
+    console.log(typeTime, missCount);
     this.props.setResult();
   }
 
@@ -91,7 +98,7 @@ export default class Game extends React.Component {
     }
     return (
       <div css={[body, background]}>
-        <Play {...data} />
+        <Play {...data} />uu
       </div>
     )
   }

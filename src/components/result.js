@@ -12,6 +12,12 @@ export default class Start extends React.Component {
       <div css={body}>
         <div css={wrapper}>
           <p>result window</p>
+          <ul>
+            <li>word count: {}</li>
+            <li>time: {}</li>
+            <li>accuracy: {}</li>
+            <li>CPM: {}</li>
+          </ul>
           <button onClick={this.props.startGame}>one more</button>
         </div>
       </div>
