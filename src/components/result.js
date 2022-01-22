@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import {css, keyframes} from '@emotion/react'
-
+import { Button } from '@mui/material';
 export default class Start extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +20,11 @@ export default class Start extends React.Component {
             <li>accuracy: {this.props.data.accuracy}%</li>
           </ul>
           </div>
-          <button onClick={this.props.startGame}>one more</button>
+          <Button 
+            onClick={this.props.startGame}
+            variant='contained'>
+              one more
+          </Button>
         </div>
       </div>
     )
