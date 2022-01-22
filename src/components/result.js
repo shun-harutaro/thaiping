@@ -14,11 +14,10 @@ export default class Start extends React.Component {
           <p>result window</p>
           <div css={ul_center}>
           <ul css={ul}>
-            <li>word count: {this.props.data.typeCount}</li>
             <li>time: {this.props.data.typeTime}</li>
-            <li>accuracy: {}</li>
-            <li>CPM: {}</li>
+            <li>word count: {this.props.data.typeCount}</li>
             <li>miss: {this.props.data.missCount}</li>
+            <li>accuracy: {this.props.data.accuracy}%</li>
           </ul>
           </div>
           <button onClick={this.props.startGame}>one more</button>

@@ -14,6 +14,8 @@ export default class App extends React.Component {
         typeCount: 0,
         missCount: 0,
         typeTime: 0,
+        //cpm: 0,
+        accuracy: 0,
       }
     }
   }
@@ -37,6 +39,8 @@ export default class App extends React.Component {
         typeCount: resultData.typeCount,
         missCount: resultData.missCount,
         typeTime: resultData.typeTime,
+        //cpm: resultData.cpm,
+        accuracy: resultData.accuracy,
       }
     })
   }

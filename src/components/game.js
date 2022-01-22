@@ -10,8 +10,8 @@ export default class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      vocab: Vocab[0].th,
-      count: 0,
+      vocab: Vocab[10].th,
+      count: 10,
       translation: Vocab[0].en,
       position: 0,
       typeCount: 0,
@@ -44,15 +44,43 @@ export default class Game extends React.Component {
     }, 1);
   }
 
+  ms2min(msTime) {
+    const min = Math.floor(msTime / 60000);
+    const mm = ('00' + min).slice(-2);
+    const ms = ('0000' + (msTime % 60000)).slice(-5);
+    const formatTime = `${mm}:${ms.slice(0,2)}.${ms.slice(2,5)}`
+    return formatTime;
+  }
+
+  /*
+  calcCPM(typeCount, msTime) {
+    const s = Math.floor(msTime / 100);
+    const keyBySec = Math.floor(typeCount / s);
+    console.log(keyBySec * 60)
+    return keyBySec * 60;
+  }
+  */
+
+  calcAccuracy(type, miss) {
+    const correct = type - miss;
+    const rate = Math.floor(correct / type * 100);
+    return rate;
+  }
+
   finish = () => {
     const finishTime = Date.now();
     const typeCount = this.state.typeCount;
     const missCount = this.state.missCount;
     const typeTime = finishTime - this.state.startTime;
+    const formatTime = this.ms2min(typeTime);
+    //const cpm = this.calcCPM(typeCount, typeTime);
+    const accuracy = this.calcAccuracy(typeCount, missCount);
     const resultData = {
+      typeTime: formatTime,
       typeCount: typeCount,
       missCount: missCount,
-      typeTime: typeTime,
+      //cpm: cpm,
+      accuracy: accuracy,
     }
     //console.log(typeTime, missCount);
     this.props.setResult(resultData);
@@ -66,12 +94,11 @@ export default class Game extends React.Component {
     let translation = this.state.translation;
     let position = this.state.position;
     let count = this.state.count;
-    let typeCount = this.state.typeCount;
+    let typeCount = this.state.typeCount + 1;
     let missCount = this.state.missCount;
 
     if (c === vocab[position]) {
       console.log("correct")
-      typeCount += 1;
       position += 1;
     } else {
       this.cssMistake();
