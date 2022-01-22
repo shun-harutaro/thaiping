@@ -4,6 +4,7 @@ import {css, keyframes} from '@emotion/react'
 import Vocab from '../vocab.json'
 
 import Play from './play'
+import { type } from '@testing-library/user-event/dist/type';
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -45,10 +46,16 @@ export default class Game extends React.Component {
 
   finish = () => {
     const finishTime = Date.now();
+    const typeCount = this.state.typeCount;
     const missCount = this.state.missCount;
     const typeTime = finishTime - this.state.startTime;
-    console.log(typeTime, missCount);
-    this.props.setResult();
+    const resultData = {
+      typeCount: typeCount,
+      missCount: missCount,
+      typeTime: typeTime,
+    }
+    //console.log(typeTime, missCount);
+    this.props.setResult(resultData);
   }
 
   // Since state is assumed to be undefined, use the arrow function
@@ -59,10 +66,12 @@ export default class Game extends React.Component {
     let translation = this.state.translation;
     let position = this.state.position;
     let count = this.state.count;
+    let typeCount = this.state.typeCount;
     let missCount = this.state.missCount;
 
     if (c === vocab[position]) {
       console.log("correct")
+      typeCount += 1;
       position += 1;
     } else {
       this.cssMistake();
@@ -86,6 +95,7 @@ export default class Game extends React.Component {
       translation: translation,
       position: position,
       missCount: missCount,
+      typeCount: typeCount,
     });
   }
 
@@ -98,7 +108,7 @@ export default class Game extends React.Component {
     }
     return (
       <div css={[body, background]}>
-        <Play {...data} />uu
+        <Play {...data} />
       </div>
     )
   }
