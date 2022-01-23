@@ -9,7 +9,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      window: 'result',
+      window: 'start',
       data: {
         typeCount: 0,
         missCount: 0,

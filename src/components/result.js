@@ -3,7 +3,8 @@ import React from 'react';
 import {css, keyframes} from '@emotion/react'
 import  Button  from '@mui/material/Button';
 import BasicTable from './BasicTable';
-import Grid from '@mui/material/Grid'
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 export default class Start extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +14,7 @@ export default class Start extends React.Component {
     return (
       <div css={body}>
         <div css={wrapper}>
-          <p>result</p>
+          <Typography variant="h6" component="div" sx={{ m: 2 }}>Result</Typography>
           <Grid container >
           <BasicTable 
             data={this.props.data}>

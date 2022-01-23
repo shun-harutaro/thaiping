@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import {css, keyframes} from '@emotion/react'
-import Button from '@mui/material/Button'
+import {css, keyframes} from '@emotion/react';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography'
 
 export default class Start extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export default class Start extends React.Component {
     return (
       <div css={body}>
         <div css={wrapper}>
-          <p>let's typing</p>
+          <Typography variant="h6" component="div" sx={{ m: 2 }}>Let's typing</Typography>
           <Button 
             variant="contained"
             sx={{ m: 2 }}

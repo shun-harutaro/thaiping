@@ -10,8 +10,8 @@ export default class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      vocab: Vocab[10].th,
-      count: 10,
+      vocab: Vocab[0].th,
+      count: 0,
       translation: Vocab[0].en,
       position: 0,
       typeCount: 0,
