@@ -69,6 +69,6 @@ const text = css`
 `
 
 const wrapper = css`
-    width: 50%;
+    width: 80%;
     text-align: center;
 `
