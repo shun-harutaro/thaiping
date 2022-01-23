@@ -12,7 +12,7 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/*<IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -20,11 +20,11 @@ export default function ButtonAppBar() {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton>*/}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Thaiping
           </Typography>
-          <Button color="inherit">Login</Button>
+          {/*<Button color="inherit">Login</Button>*/}
         </Toolbar>
       </AppBar>
     </Box>

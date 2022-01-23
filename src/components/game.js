@@ -74,7 +74,7 @@ export default class Game extends React.Component {
     const typeTime = finishTime - this.state.startTime;
     const formatTime = this.ms2min(typeTime);
     //const cpm = this.calcCPM(typeCount, typeTime);
-    const accuracy = this.calcAccuracy(typeCount, missCount);
+    const accuracy = this.calcAccuracy(typeCount, missCount) + '%';
     const resultData = {
       typeTime: formatTime,
       typeCount: typeCount,

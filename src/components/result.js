@@ -2,6 +2,8 @@
 import React from 'react';
 import {css, keyframes} from '@emotion/react'
 import  Button  from '@mui/material/Button';
+import BasicTable from './BasicTable';
+import Grid from '@mui/material/Grid'
 export default class Start extends React.Component {
   constructor(props) {
     super(props);
@@ -11,16 +13,14 @@ export default class Start extends React.Component {
     return (
       <div css={body}>
         <div css={wrapper}>
-          <p>result window</p>
-          <div css={ul_center}>
-          <ul css={ul}>
-            <li>time: {this.props.data.typeTime}</li>
-            <li>word count: {this.props.data.typeCount}</li>
-            <li>miss: {this.props.data.missCount}</li>
-            <li>accuracy: {this.props.data.accuracy}%</li>
-          </ul>
-          </div>
+          <p>result</p>
+          <Grid container >
+          <BasicTable 
+            data={this.props.data}>
+          </BasicTable>
+          </Grid>
           <Button 
+            sx={{ m: 2 }}
             onClick={this.props.startGame}
             variant='contained'>
               one more
@@ -40,17 +40,7 @@ const body = css`
 `
 
 const wrapper = css`
-  list-style: none;
   background: white;
   width: 50%;
   text-align: center;
-`
-const ul_center = css`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`
-const ul = css`
-  list-style: none;
-  padding: 0;
 `

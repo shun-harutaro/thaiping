@@ -12,9 +12,10 @@ export default class Start extends React.Component {
     return (
       <div css={body}>
         <div css={wrapper}>
-          <p>start window</p>
+          <p>let's typing</p>
           <Button 
             variant="contained"
+            sx={{ m: 2 }}
             onClick={this.props.startGame}>
               start
           </Button>
@@ -34,6 +35,11 @@ const body = css`
 
 const wrapper = css`
   background: white;
-  width: 50%;
+  width: 80%;
+  height: 50vh;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `
