@@ -1,14 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import {css, keyframes} from '@emotion/react';
+import {css} from '@emotion/react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography'
 
 export default class Start extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  
   render() {
     return (
       <div css={body}>
