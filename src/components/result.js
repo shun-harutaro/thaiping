@@ -1,15 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import {css, keyframes} from '@emotion/react'
+import {css} from '@emotion/react'
 import  Button  from '@mui/material/Button';
 import BasicTable from './BasicTable';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 export default class Start extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  
   render() {
     return (
       <div css={body}>
@@ -33,7 +29,7 @@ export default class Start extends React.Component {
 };
 
 const body = css`
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
